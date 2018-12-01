@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    //Singleton behavior for player
+    public static PlayerController player;
     //Variables for movement
 	public float speed;
 	private Rigidbody2D rb;
@@ -11,11 +13,25 @@ public class PlayerController : MonoBehaviour {
     public enum Weapons { knife, pistol, machinegun, shotgun };
     public Weapons curWeapon = Weapons.knife;
     public float cools = 0f;
-    //
+    //Variables for animation
+    //Sprite order: right, up, left, down
+    public Sprite[] facingSprites;
+    SpriteRenderer rend;
     
-	void Awake () 
-	{
-		rb = GetComponent<Rigidbody2D>();
+	void Awake ()
+    {
+        if (player == null)
+            player = this;
+        else if (player != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        rb = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
+        rend.sprite = facingSprites[3];
 	}
 	
 	// Update is called once per frame
@@ -30,7 +46,37 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (cools > 0) cools -= Time.deltaTime;
-	}
+
+
+        // Converts to a 0 to 1 scale
+        var worldPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
+        //Facing right
+        if (worldPos.x > 0.5f && worldPos.y > 0.5f)
+        {
+            rend.flipX = false;
+            rend.sprite = facingSprites[0];
+        }
+        //Facing up
+        else if (worldPos.x < 0.5f && worldPos.y > 0.5f)
+        {
+            rend.flipX = true;
+            rend.sprite = facingSprites[1];
+        }
+
+        //Facing left
+        else if (worldPos.x <= 0.5f && worldPos.y <= 0.5f)
+        {
+            rend.flipX = false;
+            rend.sprite = facingSprites[2];
+        }
+        //Facing down
+        else
+        {
+            rend.flipX = true;
+            rend.sprite = facingSprites[3];
+        }
+    }
 
 	void FixedUpdate()
 	{
