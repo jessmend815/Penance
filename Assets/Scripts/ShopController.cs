@@ -5,30 +5,37 @@ using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour {
 
-	public float blood = PlayerController.Player.blood;
-	public float currTime = PlayerController.Player.time;
-
 	public void BuyTimeS(int cost)
 	{
-		if (blood <= cost)
+		float currBlood = PlayerController.player.blood;
+		float currTime = PlayerController.player.time;		
+
+		if (currBlood >= cost)
 		{
-			time += 15;
+			PlayerController.player.blood -= cost;
+			PlayerController.player.time += 15;
 		}
 	}
 
 	public void BuyTimeM(int cost)
 	{
-		if (blood <= cost)
+		float currBlood = PlayerController.player.blood;
+		float currTime = PlayerController.player.time;
+		if (currBlood >= cost)
 		{
-			time += 30;
+			PlayerController.player.blood -= cost;
+			PlayerController.player.time += 30;
 		}
 	}
 
 	public void BuyTimeL(int cost)
-	{
-		if (blood <= cost)
+	{	
+		float currBlood = PlayerController.player.blood;
+		float currTime = PlayerController.player.time;
+		if (currBlood >= cost)
 		{
-			time += 45;
+			PlayerController.player.blood -= cost;
+			PlayerController.player.time += 45;
 		}
 	}
 

@@ -17,7 +17,11 @@ public class PlayerController : MonoBehaviour {
     //Sprite order: right, up, left, down
     public Sprite[] facingSprites;
     SpriteRenderer rend;
-    
+    //Variable Blood
+    public float blood;
+    //Shop Variables
+    public float time;
+
 	void Awake ()
     {
         if (player == null)

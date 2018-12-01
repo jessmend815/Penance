@@ -666,6 +666,13 @@ MonoBehaviour:
   speed: 5
   curWeapon: 0
   cools: 0
+  facingSprites:
+  - {fileID: 21300000, guid: 7160f4ff6ed0c4a4f9bd722851d68f24, type: 3}
+  - {fileID: 21300000, guid: 59ee5dde9f0dc234193550ab045c4a7a, type: 3}
+  - {fileID: 21300000, guid: 8fa5f695c146a3544928b748a1aad4bf, type: 3}
+  - {fileID: 21300000, guid: 20e6166d0b62817488889a7e05d0c6ef, type: 3}
+  blood: 100
+  time: 100
 --- !u!1 &1423786050
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,13 +749,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1066656496}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1066656497}
+        m_MethodName: BuyTimeS
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 25
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -803,7 +810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1430009900
 RectTransform:
   m_ObjectHideFlags: 0
