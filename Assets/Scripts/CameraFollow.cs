@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
+    public float spd;
+    // Update is called once per frame
+    void LateUpdate () {
+        Vector3 playTrans = PlayerController.player.transform.position;
+        transform.position = Vector3.Lerp(transform.position, new Vector3(playTrans.x, playTrans.y, transform.position.z), Time.deltaTime * spd);
 	}
 }

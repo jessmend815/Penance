@@ -5,16 +5,19 @@ using UnityEngine;
 public class ZombieSquidController : EnemyController
 {
     public bool isClose = false;
-    public float hp = 10;
+    public float hp = 50;
+    public float maxHp = 50;
     public float blood = 50;
+    public GameObject deadSquid;
 
     private void Awake()
     {
 
     }
+
     private void OnEnable()
     {
-
+        hp = maxHp;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,10 +38,28 @@ public class ZombieSquidController : EnemyController
 
     private void Update()
     {
-        
+        switch(curState)
+        {
+            case states.idle:
+                Idle();
+                break;
+            case states.chase:
+                Chase();
+                break;
+            case states.attack:
+                Attack();
+                break;
+        }
+
+        if (hp <= 0)
+        {
+            //Instantiate(deadSquid, transform.position, Quaternion.identity);
+            PlayerController.player.blood += blood;
+            Destroy(gameObject);
+        }
     }
 
-    public void TakeDamage(float damage)
+    public override void TakeDamage(float damage)
     {
         hp -= damage;
     }
