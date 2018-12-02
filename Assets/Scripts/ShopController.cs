@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopController : MonoBehaviour {
-
+	//Function for buying a small amount of time
 	public void BuyTimeS(int cost)
 	{
 		float currBlood = PlayerController.player.blood;
@@ -16,7 +16,7 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.time += 15;
 		}
 	}
-
+	//Function for buying a medium amount of time
 	public void BuyTimeM(int cost)
 	{
 		float currBlood = PlayerController.player.blood;
@@ -27,7 +27,7 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.time += 30;
 		}
 	}
-
+	//Function for buying a large amount of time
 	public void BuyTimeL(int cost)
 	{	
 		float currBlood = PlayerController.player.blood;
