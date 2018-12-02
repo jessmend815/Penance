@@ -7,13 +7,16 @@ public class TriggerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "NPC")
+        if (!collision.isTrigger)
         {
-            //GetComponent<NPCController>().TakeDamage(damage);
-        }
-        if (collision.tag == "Enemy")
-        {
-            GetComponent<EnemyController>().TakeDamage(damage);
+            if (collision.tag == "NPC")
+            {
+                //collision.GetComponent<NPCController>().TakeDamage(damage);
+            }
+            if (collision.tag == "Enemy")
+            {
+                collision.GetComponent<EnemyController>().TakeDamage(damage);
+            }
         }
     }
 }

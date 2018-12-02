@@ -9,15 +9,21 @@ public class ZombieSquidController : EnemyController
     public float maxHp = 50;
     public float blood = 50;
     public GameObject deadSquid;
+    Animator anim;
+    Vector3 startPos;
 
     private void Awake()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
+        startPos = transform.position;
         hp = maxHp;
+        int animToPick = Random.Range(0, 2);
+        if (animToPick == 0) anim.Play("ZombieSquid");
+        else anim.Play("ZombieSquidBack");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,7 +59,7 @@ public class ZombieSquidController : EnemyController
 
         if (hp <= 0)
         {
-            //Instantiate(deadSquid, transform.position, Quaternion.identity);
+            Instantiate(deadSquid, transform.position, Quaternion.identity);
             PlayerController.player.blood += blood;
             Destroy(gameObject);
         }
@@ -83,6 +89,4 @@ public class ZombieSquidController : EnemyController
     {
 
     }
-
-
 }

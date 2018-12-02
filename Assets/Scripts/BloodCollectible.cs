@@ -19,5 +19,6 @@ public class BloodCollectible : MonoBehaviour {
             PlayerController.player.blood += 1;
             blood -= 1;
         }
+        if (blood <= 0) Destroy(gameObject);
     }
 }
