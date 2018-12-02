@@ -38,5 +38,15 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.time += 45;
 		}
 	}
-
+	//Function for buying a potion
+	public void BuyPotion(int cost)
+	{
+		float currBlood = PlayerController.player.blood;
+		float currPotion = PlayerController.player.hp;
+		if (currBlood >= cost)
+		{
+			PlayerController.player.blood -= cost;
+			PlayerController.player.maxhp;
+		}
+	}
 }
