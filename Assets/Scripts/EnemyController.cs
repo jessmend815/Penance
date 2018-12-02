@@ -2,43 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour {
-    public bool isClose = false;
-    public float hp = 10;
-    public float blood = 50;
+public abstract class EnemyController : MonoBehaviour
+{
+    public virtual void Idle() { }
 
-    private void Awake()
-    {
-        
-    }
-    private void OnEnable()
-    {
-        
-    }
+    public virtual void Chase() { }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            isClose = true;
-        }
-    }
+    public virtual void Attack() { }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            isClose = false;
-        }
-    }
+    public virtual void Death() { }
 
-    void Update()
-    {
-
-    }
-
-    public void TakeDamage(float damage)
-    {
-        hp -= damage;
-    }
+    public virtual void TakeDamage() { }
 }

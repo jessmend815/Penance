@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     //Singleton behavior for player
@@ -15,24 +16,29 @@ public class PlayerController : MonoBehaviour {
     float dodgeCools = 0f;
     //Variables for shooting
     public enum Weapons { knife, pistol, machinegun, shotgun };
-    bool pistolUnlocked = false;
-    bool machinegunUnlocked = false;
-    bool shotgunUnlocked = false;
+    public bool pistolUnlocked = false;
+    public bool machinegunUnlocked = false;
+    public bool shotgunUnlocked = false;
     public Weapons curWeapon = Weapons.knife;
     public float cools = 0f;
+    public GameObject bullet;
     //Variables for animation
     //Sprite order: right, up, left, down
     public Sprite[] facingSprites;
-    SpriteRenderer rend;
+    public SpriteRenderer rend;
     public GameObject weaponPos;
     public float[] weaponPositions;
-    int currentPos = 0;
     public Animator weaponAnim;
-    SpriteRenderer weaponRend;
+    public SpriteRenderer weaponRend;
+    public Sprite[] weaponSprites;
     //Variable Blood
     public float blood;
     //Shop Variables
     public float time;
+    public Text timeUI;
+    //Health variables
+    public int hp;
+    public int maxHp = 100;
 
 	void Awake ()
     {
@@ -48,11 +54,18 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = facingSprites[3];
-        weaponRend = GetComponentInChildren<SpriteRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+    private void OnEnable()
+    {
+        hp = maxHp;
+        pistolUnlocked = false;
+        machinegunUnlocked = false;
+        shotgunUnlocked = false;
+}
+
+    // Update is called once per frame
+    void Update () 
 	{
         //Move inputs
 		Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -60,13 +73,60 @@ public class PlayerController : MonoBehaviour {
 
         //Move dude
         rb.velocity = moveVelocity;
-        //if (moveInput.x != 0) rb.AddForce(Vector2.right * speed * moveInput.x * Time.fixedDeltaTime);
-        //if (moveInput.y != 0) rb.AddForce(Vector2.up * speed * moveInput.y * Time.fixedDeltaTime);
         
         //Attack button
         if (Input.GetMouseButton(0) && cools <= 0f)
         {
             Attack();
+        }
+        
+        //Switch weapons with q
+        if (Input.GetButtonDown("TabLeft"))
+        {
+            switch (curWeapon)
+            {
+                case Weapons.knife:
+                    if (pistolUnlocked)
+                    {
+                        curWeapon = Weapons.pistol;
+                    }
+                    else if (machinegunUnlocked)
+                    {
+                        curWeapon = Weapons.machinegun;
+                    }
+                    else if (shotgunUnlocked)
+                    {
+                        curWeapon = Weapons.shotgun;
+                    }
+                    break;
+                case Weapons.pistol:
+                    if (machinegunUnlocked)
+                    {
+                        curWeapon = Weapons.machinegun;
+                    }
+                    else if (shotgunUnlocked)
+                    {
+                        curWeapon = Weapons.shotgun;
+                    }
+                    else
+                    {
+                        curWeapon = Weapons.knife;
+                    }
+                    break;
+                case Weapons.machinegun:
+                    if (shotgunUnlocked)
+                    {
+                        curWeapon = Weapons.shotgun;
+                    }
+                    else
+                    {
+                        curWeapon = Weapons.knife;
+                    }
+                    break;
+                case Weapons.shotgun:
+                    curWeapon = Weapons.knife;
+                    break;
+            }
         }
 
         //Decrement the cooldowns
@@ -82,14 +142,12 @@ public class PlayerController : MonoBehaviour {
         {
             rend.flipX = false;
             rend.sprite = facingSprites[0];
-            currentPos = 0;
         }
         //Facing up
         else if (worldPos.x < 0.5f && worldPos.y > 0.5f)
         {
             rend.flipX = true;
             rend.sprite = facingSprites[1];
-            currentPos = 1;
         }
 
         //Facing left
@@ -97,17 +155,20 @@ public class PlayerController : MonoBehaviour {
         {
             rend.flipX = true;
             rend.sprite = facingSprites[0];
-            currentPos = 2;
         }
         //Facing down
         else
         {
             rend.flipX = true;
             rend.sprite = facingSprites[3];
-            currentPos = 3;
         }
-        //Set the position of the weaponPos gameobject
-        weaponPos.transform.localPosition = new Vector2(weaponPositions[currentPos], weaponPos.transform.localPosition.y);
+        //Set the weapon sprite
+        weaponAnim.SetInteger("curWeapon", (int)curWeapon);
+
+        //Decrement the timer
+        if (time > 0) time -= Time.deltaTime;
+        //Update time UI
+        timeUI.text = "Time remaining: " + Mathf.Round(time).ToString();
     }
 
 	void FixedUpdate()
@@ -123,6 +184,20 @@ public class PlayerController : MonoBehaviour {
         {
             dodgeCools -= Time.deltaTime;
             rb.velocity = dodgeVector * dodgeSpeed;
+        }
+        
+        //Change the scale of the weapons based on what you're holding
+        if (curWeapon != Weapons.knife)
+        {
+            if (curWeapon != Weapons.shotgun)
+            {
+                weaponRend.transform.localScale = new Vector3(0.35f, 0.35f, 1);
+            }
+            else weaponRend.transform.localScale = new Vector3(0.275f, 0.275f, 1);
+        }
+        else
+        {
+            weaponRend.transform.localScale = new Vector3(0.5f, 0.5f, 1);
         }
     }
 
@@ -155,16 +230,23 @@ public class PlayerController : MonoBehaviour {
 
     void pistol()
     {
-
+        Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation);
+        cools = 0.225f;
     }
 
     void machinegun()
     {
-
+        Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation);
+        cools = 0.1f;
     }
 
+    //Spawn 3-5 instead of 1 and modify their rotation
     void shotgun()
     {
-
+        for (int i = 0; i < 5; i++)
+        {
+            GameObject obj = Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation * Quaternion.Euler(0, 0, -30 + (i*15)));
+        }
+        cools = 2.5f;
     }
 }
