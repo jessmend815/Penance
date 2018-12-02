@@ -63,8 +63,5 @@ public class ZombieSquidController : EnemyController
 
     }
 
-    public override void TakeDamage()
-    {
 
-    }
 }

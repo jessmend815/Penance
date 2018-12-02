@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     //Singleton behavior for player
@@ -168,7 +169,23 @@ public class PlayerController : MonoBehaviour {
         //Decrement the timer
         if (time > 0) time -= Time.deltaTime;
         //Update time UI
-        timeUI.text = "Time remaining: " + Mathf.Round(time).ToString();
+        if (timeUI != null)
+        {
+            timeUI.text = "Time remaining: " + Mathf.Round(time).ToString();
+        }
+        
+        //Game Over Check
+        if (hp <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+            gameObject.SetActive(false);
+        }
+        else if (time <= 0)
+        {
+            SceneManager.LoadScene("TimeOut");
+            gameObject.SetActive(false);
+        }
+        //End of update event
     }
 
 	void FixedUpdate()
@@ -249,4 +266,5 @@ public class PlayerController : MonoBehaviour {
         }
         cools = 2.5f;
     }
+    
 }

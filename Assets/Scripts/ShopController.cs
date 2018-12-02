@@ -42,11 +42,10 @@ public class ShopController : MonoBehaviour {
 	public void BuyPotion(int cost)
 	{
 		float currBlood = PlayerController.player.blood;
-		float currPotion = PlayerController.player.hp;
 		if (currBlood >= cost)
 		{
 			PlayerController.player.blood -= cost;
-			PlayerController.player.maxhp;
+			PlayerController.player.hp = PlayerController.player.maxHp;
 		}
 	}
 }
