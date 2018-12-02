@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour {
     //Singleton behavior for player
     public static PlayerController player;
+    public Vector3 startPos;
     //Variables for movement
 	public float speed;
 	private Rigidbody2D rb;
@@ -55,6 +56,8 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = facingSprites[3];
+
+        startPos = transform.position;
 	}
 
     private void OnEnable()
@@ -242,13 +245,13 @@ public class PlayerController : MonoBehaviour {
     void knife()
     {
         weaponAnim.Play("SwordAttack");
-        cools = 1.25f;
+        cools = 1.325f;
     }
 
     void pistol()
     {
         Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation);
-        cools = 0.225f;
+        cools = 0.275f;
     }
 
     void machinegun()
