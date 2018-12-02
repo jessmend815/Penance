@@ -46,7 +46,7 @@ public class ShopController : MonoBehaviour {
 		if (currBlood >= cost)
 		{
 			PlayerController.player.blood -= cost;
-			PlayerController.player.maxhp;
+			PlayerController.player.hp = PlayerController.player.maxHp;
 		}
 	}
 }

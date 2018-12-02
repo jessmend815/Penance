@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class EnemyController : MonoBehaviour
 {
+    public enum states { idle, chase, attack };
+    public states curState = states.idle;
+
     public virtual void Idle() { }
 
     public virtual void Chase() { }
@@ -12,5 +15,5 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void Death() { }
 
-    public virtual void TakeDamage() { }
+    public virtual void TakeDamage(float damage) { }
 }
