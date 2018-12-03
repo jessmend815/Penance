@@ -8,13 +8,14 @@ public class NPCController : MonoBehaviour {
 	public bool shopOpen = false;
 	public GameObject TestShop;
 	public float npcHp = 100;
-
+	public GameObject deadNpc;
 	public void TakeDamage(float damage)
 	{
 		npcHp -= damage;
 		if (npcHp <= 0)
 		{
-			
+			Instantiate(deadNpc, transform.position, Quaternion.identity);
+            Destroy(gameObject);
 		}
 	}
 
