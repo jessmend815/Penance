@@ -39,8 +39,6 @@ public class NPCController : MonoBehaviour {
 	{	//Opens Shop Menu When Pressing E
 		if (isClose)
 		{
-			Debug.Log("Player is in range");
-
 			if (Input.GetKeyDown(KeyCode.E))
 			{
 				shopOpen = true;

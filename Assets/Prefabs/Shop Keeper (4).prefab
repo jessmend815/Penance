@@ -98,7 +98,7 @@ MonoBehaviour:
   shopOpen: 0
   TestShop: {fileID: 0}
   npcHp: 100
-  deadNpc: {fileID: 0}
+  deadNpc: {fileID: 1929511911925158, guid: c890e4d7ad7c63b4dade811177414684, type: 2}
 --- !u!212 &212179116017200746
 SpriteRenderer:
   m_ObjectHideFlags: 1

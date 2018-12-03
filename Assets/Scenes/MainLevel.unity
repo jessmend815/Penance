@@ -1909,11 +1909,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4012761640044146, guid: 0ba3277711a13984e80f77c403db772b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: 4012761640044146, guid: 0ba3277711a13984e80f77c403db772b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -35.2
+      value: -37.11
       objectReference: {fileID: 0}
     - target: {fileID: 4012761640044146, guid: 0ba3277711a13984e80f77c403db772b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1954,11 +1954,6 @@ Prefab:
       propertyPath: health
       value: 
       objectReference: {fileID: 1956744608}
-    - target: {fileID: 114456619624341040, guid: 0ba3277711a13984e80f77c403db772b,
-        type: 2}
-      propertyPath: Information
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba3277711a13984e80f77c403db772b, type: 2}
   m_IsPrefabAsset: 0
@@ -3889,7 +3884,7 @@ GameObject:
   - component: {fileID: 1655043642}
   m_Layer: 5
   m_Name: TimeText
-  m_TagString: Untagged
+  m_TagString: Time
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4964,7 +4959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c74d97ef8e42d34b884eeab32be11b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  val: 0.01
+  val: 0.0075
   fade: 0
 --- !u!114 &1914087666
 MonoBehaviour:

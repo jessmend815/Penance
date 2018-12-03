@@ -12,6 +12,7 @@ TagManager:
   - EnemyBullet
   - Info
   - Win
+  - Time
   layers:
   - Default
   - TransparentFX
