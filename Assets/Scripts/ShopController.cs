@@ -28,7 +28,7 @@ public class ShopController : MonoBehaviour {
 		if (currBlood >= cost)
 		{
 			PlayerController.player.blood -= cost;
-			PlayerController.player.time += 15;
+			PlayerController.player.time += 5;
 		}
 	}
 	//Function for buying a medium amount of time
@@ -39,7 +39,7 @@ public class ShopController : MonoBehaviour {
 		if (currBlood >= cost)
 		{
 			PlayerController.player.blood -= cost;
-			PlayerController.player.time += 30;
+			PlayerController.player.time += 10;
 		}
 	}
 	//Function for buying a large amount of time
@@ -50,7 +50,7 @@ public class ShopController : MonoBehaviour {
 		if (currBlood >= cost)
 		{
 			PlayerController.player.blood -= cost;
-			PlayerController.player.time += 60;
+			PlayerController.player.time += 20;
 		}
 	}
 	//End Of Time Shop
