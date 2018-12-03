@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\DemonController.cs" />
     <Compile Include="Assets\Scripts\EnemyBulletController.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\EnemyTriggerController.cs" />
     <Compile Include="Assets\Scripts\FadeText.cs" />
     <Compile Include="Assets\Scripts\GoblinController.cs" />
     <Compile Include="Assets\Scripts\NPCController.cs" />
