@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 212442541313382640}
   - component: {fileID: 95450619381973822}
   - component: {fileID: 61382461102640226}
-  - component: {fileID: 50066964983360746}
   - component: {fileID: 114307760648428658}
   m_Layer: 0
   m_Name: ZombieSquid
@@ -44,26 +43,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50066964983360746
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1303712634049322}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 5
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!61 &61382461102640226
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -119,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  isClose: 0
   hp: 80
   maxHp: 80
   deadSquid: {fileID: 1140585908068284, guid: c9614ae7a849f7d459681c74cb8bf3ec, type: 2}

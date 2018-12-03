@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ZombieSquidController : EnemyController
 {
-    public bool isClose = false;
     public float hp = 50;
     public float maxHp = 50;
     public GameObject deadSquid;
@@ -13,14 +12,12 @@ public class ZombieSquidController : EnemyController
     public float chaseDistance;
     public float attackRange;
     public float spd;
-    Rigidbody2D bod;
     public GameObject bullet;
     float cools = 0f;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        bod = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()

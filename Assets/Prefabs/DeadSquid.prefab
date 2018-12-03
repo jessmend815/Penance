@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140585908068284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: -5, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -68,8 +68,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3cb8d60083cf2b4ebde947f945ed739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodLow: 25
-  bloodHigh: 50
+  bloodLow: 50
+  bloodHigh: 70
 --- !u!212 &212263394641759932
 SpriteRenderer:
   m_ObjectHideFlags: 1
