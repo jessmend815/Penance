@@ -35,7 +35,7 @@ public class BulletController : MonoBehaviour {
             if (!collision.isTrigger)
             {
                 Invoke("Disable", 0.01f);
-                //GetComponent<NPCController>().TakeDamage(damage);
+                GetComponent<NPCController>().TakeDamage(damage);
             }
         }
         if (collision.tag == "Enemy")

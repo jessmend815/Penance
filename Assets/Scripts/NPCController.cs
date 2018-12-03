@@ -7,6 +7,16 @@ public class NPCController : MonoBehaviour {
 	public bool isClose = false;
 	public bool shopOpen = false;
 	public GameObject TestShop;
+	public float npcHp = 100;
+
+	public void TakeDamage(float damage)
+	{
+		npcHp -= damage;
+		if (npcHp <= 0)
+		{
+			
+		}
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
