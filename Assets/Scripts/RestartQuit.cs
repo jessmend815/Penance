@@ -10,7 +10,7 @@ public class RestartQuit : MonoBehaviour {
     {   
         PlayerController.player.gameObject.transform.position = PlayerController.player.startPos;
         PlayerController.player.gameObject.SetActive(true);
-        SceneManager.LoadScene("ColeScene");
+        SceneManager.LoadScene("MainLevel");
     }
     public void QuitGame()
     {

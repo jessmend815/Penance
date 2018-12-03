@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnEnable()
     {
+        curWeapon = Weapons.knife;
         hp = maxHp;
         blood = Mathf.Round(Random.Range(startBloodLow, startBloodHigh));
         pistolUnlocked = false;
@@ -183,6 +184,8 @@ public class PlayerController : MonoBehaviour {
         {
             timeUI.text = "Time remaining: " + Mathf.Round(time).ToString();
         }
+
+        if (Information == null) Information = GameObject.FindGameObjectWithTag("Info");
 
         //Press I for help
         if (Input.GetKeyDown(KeyCode.I))
