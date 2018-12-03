@@ -7,6 +7,9 @@ TagManager:
   - Bullet
   - Enemy
   - NPC
+  - Blood
+  - Health
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

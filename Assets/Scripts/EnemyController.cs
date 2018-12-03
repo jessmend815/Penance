@@ -13,7 +13,5 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void Attack() { }
 
-    public virtual void Death() { }
-
     public virtual void TakeDamage(float damage) { }
 }

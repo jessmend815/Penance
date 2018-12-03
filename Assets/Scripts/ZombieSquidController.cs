@@ -7,14 +7,20 @@ public class ZombieSquidController : EnemyController
     public bool isClose = false;
     public float hp = 50;
     public float maxHp = 50;
-    public float blood = 50;
     public GameObject deadSquid;
     Animator anim;
     Vector3 startPos;
+    public float chaseDistance;
+    public float attackRange;
+    public float spd;
+    Rigidbody2D bod;
+    public GameObject bullet;
+    float cools = 0f;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        bod = GetComponent<Rigidbody2D>();
     }
 
     private void OnEnable()
@@ -24,22 +30,6 @@ public class ZombieSquidController : EnemyController
         int animToPick = Random.Range(0, 2);
         if (animToPick == 0) anim.Play("ZombieSquid");
         else anim.Play("ZombieSquidBack");
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            isClose = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            isClose = false;
-        }
     }
 
     private void Update()
@@ -60,8 +50,12 @@ public class ZombieSquidController : EnemyController
         if (hp <= 0)
         {
             Instantiate(deadSquid, transform.position, Quaternion.identity);
-            PlayerController.player.blood += blood;
             Destroy(gameObject);
+        }
+
+        if (cools > 0)
+        {
+            cools -= Time.deltaTime;
         }
     }
 
@@ -72,21 +66,62 @@ public class ZombieSquidController : EnemyController
 
     public override void Idle()
     {
+        float distance = Vector3.Distance(transform.position, PlayerController.player.transform.position);
+        if (distance <= chaseDistance)
+        {
+            curState = states.chase;
+        }
 
+        if (transform.position != startPos)
+        {
+            var step = spd * Time.deltaTime;
+
+            transform.position = Vector3.MoveTowards(transform.position, startPos, step);
+        }
     }
 
     public override void Chase()
     {
+        float distance = Vector3.Distance(transform.position, PlayerController.player.transform.position);
+        if (distance > chaseDistance)
+        {
+            curState = states.idle;
+        }
+        if (distance < attackRange && cools <= 0)
+        {
+            curState = states.attack;
+        }
 
+        if (PlayerController.player.transform.position.y > transform.position.y)
+        {
+            anim.Play("ZombieSquidBack");
+        }
+        else
+        {
+            anim.Play("ZombieSquid");
+        }
+
+        var step = spd * Time.deltaTime;
+
+        transform.position = Vector3.MoveTowards(transform.position, PlayerController.player.transform.position, step);
     }
 
     public override void Attack()
     {
+        if (PlayerController.player.transform.position.y > transform.position.y)
+        {
+            anim.Play("ZombieSquidBack");
+        }
+        else
+        {
+            anim.Play("ZombieSquid");
+        }
 
-    }
-
-    public override void Death()
-    {
-
+        Vector3 dir = PlayerController.player.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + Random.Range(-30, 30);
+        Quaternion.AngleAxis(angle, Vector3.forward);
+        Instantiate(bullet, transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
+        cools = 0.75f;
+        curState = states.chase;
     }
 }

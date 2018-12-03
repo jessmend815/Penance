@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
     public float dodgeSpeed;
     public float regSpd;
     float dodgeCools = 0f;
+    bool canDodge = true;
     //Variables for shooting
     public enum Weapons { knife, pistol, machinegun, shotgun };
     public bool pistolUnlocked = false;
@@ -29,18 +30,22 @@ public class PlayerController : MonoBehaviour {
     public Sprite[] facingSprites;
     public SpriteRenderer rend;
     public GameObject weaponPos;
-    public float[] weaponPositions;
     public Animator weaponAnim;
     public SpriteRenderer weaponRend;
     public Sprite[] weaponSprites;
     //Variable Blood
+    public float startBloodLow;
+    public float startBloodHigh;
     public float blood;
     //Shop Variables
     public float time;
     public Text timeUI;
     //Health variables
-    public int hp;
-    public int maxHp = 100;
+    public float hp;
+    public float maxHp = 100;
+    //UI stuff
+    public Text bloodText;
+    public Image health;
 
 	void Awake ()
     {
@@ -63,10 +68,11 @@ public class PlayerController : MonoBehaviour {
     private void OnEnable()
     {
         hp = maxHp;
+        blood = Mathf.Round(Random.Range(startBloodLow, startBloodHigh));
         pistolUnlocked = false;
         machinegunUnlocked = false;
         shotgunUnlocked = false;
-}
+    }
 
     // Update is called once per frame
     void Update () 
@@ -135,7 +141,6 @@ public class PlayerController : MonoBehaviour {
 
         //Decrement the cooldowns
         if (cools > 0) cools -= Time.deltaTime;
-        if (dodgeCools > 0) dodgeCools -= 1;
 
         //Stuff to make the player face the right direction
         // Converts to a 0 to 1 scale
@@ -188,24 +193,39 @@ public class PlayerController : MonoBehaviour {
             SceneManager.LoadScene("TimeOut");
             gameObject.SetActive(false);
         }
+        //Blood UI
+        if (health == null) health = GameObject.FindGameObjectWithTag("Health").GetComponent<Image>();
+        if (bloodText == null) bloodText = GameObject.FindGameObjectWithTag("Blood").GetComponent<Text>();
+        if (bloodText != null) bloodText.text = blood.ToString();
+        if (health != null) health.fillAmount = hp / maxHp;
+        
         //End of update event
+    }
+
+    void CanDodge()
+    {
+        canDodge = true;
     }
 
 	void FixedUpdate()
     {
         //Dodge dude
-        if (Input.GetButtonDown("Fire3") && dodgeCools <= 0)
+        if (Input.GetButtonDown("Fire3") && dodgeCools <= 0 && canDodge)
         {
+            canDodge = false;
+            dodgeCools = 0.15f;
             dodgeVector = moveVelocity;
-            dodgeCools = 2.5f;
         }
+
+        if (!canDodge && dodgeCools <= 0) Invoke("CanDodge", 1f);
+
         //Dodge
         if (dodgeCools > 0)
         {
             dodgeCools -= Time.deltaTime;
             rb.velocity = dodgeVector * dodgeSpeed;
         }
-        
+
         //Change the scale of the weapons based on what you're holding
         if (curWeapon != Weapons.knife)
         {
@@ -241,7 +261,7 @@ public class PlayerController : MonoBehaviour {
                 break;
         }
     }
-
+    
     void knife()
     {
         weaponAnim.Play("SwordAttack");
@@ -269,5 +289,9 @@ public class PlayerController : MonoBehaviour {
         }
         cools = 2.5f;
     }
-    
+
+    public void TakeDamage(float damage)
+    {
+        hp -= damage;
+    }
 }
