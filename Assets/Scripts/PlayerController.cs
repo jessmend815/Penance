@@ -41,7 +41,8 @@ public class PlayerController : MonoBehaviour {
     //Health variables
     public int hp;
     public int maxHp = 100;
-
+    //Game Object for information text
+    public GameObject Information;
 	void Awake ()
     {
         if (player == null)
@@ -176,7 +177,14 @@ public class PlayerController : MonoBehaviour {
         {
             timeUI.text = "Time remaining: " + Mathf.Round(time).ToString();
         }
-        
+
+        //Press I for help
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Information.SetActive(true);
+        }
+        else Information.GetComponent<FadeText>().fade = true;
+
         //Game Over Check
         if (hp <= 0)
         {
