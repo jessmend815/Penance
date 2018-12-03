@@ -41,19 +41,14 @@ public class PlayerController : MonoBehaviour {
     public float time;
     public Text timeUI;
     //Health variables
-<<<<<<< HEAD
     public float hp;
     public float maxHp = 100;
     //UI stuff
     public Text bloodText;
     public Image health;
-
-=======
-    public int hp;
-    public int maxHp = 100;
     //Game Object for information text
     public GameObject Information;
->>>>>>> e92c6c74f4be5daef33330ae25d0faa03237d9e5
+
 	void Awake ()
     {
         if (player == null)
