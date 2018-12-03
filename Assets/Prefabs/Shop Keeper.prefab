@@ -97,6 +97,8 @@ MonoBehaviour:
   isClose: 0
   shopOpen: 0
   TestShop: {fileID: 0}
+  npcHp: 100
+  deadNpc: {fileID: 0}
 --- !u!212 &212614664675319576
 SpriteRenderer:
   m_ObjectHideFlags: 1

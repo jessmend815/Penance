@@ -100,7 +100,6 @@ public class GoblinController : EnemyController
         {
             anim.Play("Goblin");
         }
-        Debug.Log(distance);
 
         var step = spd * Time.deltaTime;
 

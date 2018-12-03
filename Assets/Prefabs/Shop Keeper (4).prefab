@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61945019153810192}
   m_Layer: 0
   m_Name: Shop Keeper (4)
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +97,8 @@ MonoBehaviour:
   isClose: 0
   shopOpen: 0
   TestShop: {fileID: 0}
+  npcHp: 100
+  deadNpc: {fileID: 0}
 --- !u!212 &212179116017200746
 SpriteRenderer:
   m_ObjectHideFlags: 1

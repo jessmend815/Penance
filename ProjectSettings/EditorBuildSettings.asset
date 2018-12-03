@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ColeScene.unity
+    path: Assets/Scenes/MainLevel.unity
     guid: e379181b7042897438e5241bead3e1b2
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TimeOut.unity
     guid: 73d7e2e7aa1306f4f980f8e41afa8e40
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 49521f87503cb9b469be857485812f53
   m_configObjects: {}

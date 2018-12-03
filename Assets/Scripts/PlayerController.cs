@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         curWeapon = Weapons.knife;
         hp = maxHp;
         blood = Mathf.Round(Random.Range(startBloodLow, startBloodHigh));
@@ -78,10 +79,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () 
-	{
+    void Update ()
+    {
+        //Unlock mouse
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Cursor.lockState = CursorLockMode.None;
         //Move inputs
-		Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		moveVelocity = moveInput.normalized * regSpd;
 
         //Move dude
