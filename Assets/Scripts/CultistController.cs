@@ -100,7 +100,7 @@ public class CultistController : EnemyController
 
         var step = spd * Time.deltaTime;
 
-        transform.position = Vector3.MoveTowards(transform.position, PlayerController.player.transform.position, step);
+        if (distance > 4f) transform.position = Vector3.MoveTowards(transform.position, PlayerController.player.transform.position, step);
     }
 
     public override void Attack()

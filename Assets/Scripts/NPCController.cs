@@ -9,7 +9,15 @@ public class NPCController : MonoBehaviour {
 	public GameObject TestShop;
 	public float npcHp = 100;
 	public GameObject deadNpc;
-	public void TakeDamage(float damage)
+    public AudioClip[] welcome;
+    AudioSource src;
+
+    private void Awake()
+    {
+        src = GetComponent<AudioSource>();
+    }
+
+    public void TakeDamage(float damage)
 	{
 		npcHp -= damage;
 		if (npcHp <= 0)
@@ -32,7 +40,8 @@ public class NPCController : MonoBehaviour {
 		{
 			isClose = false;
 			shopOpen = false;
-		}
+            PlayerController.player.isInShop = false;
+        }
 	}
 	
 	private void Update () 
@@ -41,7 +50,12 @@ public class NPCController : MonoBehaviour {
 		{
 			if (Input.GetKeyDown(KeyCode.E))
 			{
-				shopOpen = true;
+                PlayerController.player.isInShop = true;
+
+                if (!shopOpen)
+                    src.PlayOneShot(welcome[Random.Range(0, welcome.Length)]);
+
+                shopOpen = true;
 
 				if (shopOpen == true)
 				{

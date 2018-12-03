@@ -7,9 +7,12 @@ public class EnemyBulletController : MonoBehaviour
     public float spd = 10;
     public float damage = 5;
     Rigidbody2D bod;
+    public AudioClip hit;
+    public AudioSource src;
 
     private void Awake()
     {
+        src = GameObject.FindGameObjectWithTag("Source").GetComponent<AudioSource>();
         bod = GetComponent<Rigidbody2D>();
     }
 
@@ -35,6 +38,7 @@ public class EnemyBulletController : MonoBehaviour
         {
             if (collision.isTrigger == false)
             {
+                src.PlayOneShot(hit);
                 PlayerController.player.TakeDamage(damage);
                 Invoke("Disable", 0.01f);
             }
