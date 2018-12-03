@@ -13,6 +13,7 @@ TagManager:
   - Info
   - Win
   - Time
+  - Source
   layers:
   - Default
   - TransparentFX

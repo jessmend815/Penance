@@ -7,6 +7,13 @@ public class BloodCollectible : MonoBehaviour {
     public float bloodHigh;
     float blood;
     bool isClose = false;
+    public AudioClip bloodSnd;
+    AudioSource src;
+
+    private void Awake()
+    {
+        src = GetComponent<AudioSource>();
+    }
 
     private void OnEnable()
     {
@@ -30,6 +37,11 @@ public class BloodCollectible : MonoBehaviour {
 
     private void Update()
     {
+        if (isClose && Input.GetMouseButtonDown(1))
+        {
+            src.PlayOneShot(bloodSnd);
+        }
+
         if (isClose && Input.GetMouseButton(1) && blood > 0)
         {
             PlayerController.player.blood += 1;

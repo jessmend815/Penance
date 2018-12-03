@@ -49,6 +49,13 @@ public class PlayerController : MonoBehaviour {
     public Image health;
     //Game Object for information text
     public GameObject Information;
+    //For being in shops
+    public bool isInShop = false;
+    //Sounds
+    public AudioClip shootSound;
+    public AudioClip shotgunSound;
+    public AudioClip swingSound;
+    public AudioSource src;
 
 	void Awake ()
     {
@@ -61,6 +68,7 @@ public class PlayerController : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
+        src = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         rend.sprite = facingSprites[3];
@@ -93,7 +101,7 @@ public class PlayerController : MonoBehaviour {
         rb.velocity = moveVelocity;
         
         //Attack button
-        if (Input.GetMouseButton(0) && cools <= 0f)
+        if (Input.GetMouseButton(0) && cools <= 0f && !isInShop)
         {
             Attack();
         }
@@ -285,25 +293,32 @@ public class PlayerController : MonoBehaviour {
     
     void knife()
     {
+        src.PlayOneShot(swingSound);
         weaponAnim.Play("SwordAttack");
         cools = 1.325f;
     }
 
     void pistol()
     {
+        src.PlayOneShot(shootSound);
         Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation);
         cools = 0.275f;
     }
 
     void machinegun()
     {
-        //Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation + new Vector3(0, 0, Random.Range(-20, 20)));
+        src.PlayOneShot(shootSound);
+        Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + Random.Range(-20, 20);
+        Quaternion.AngleAxis(angle, Vector3.forward);
+        Instantiate(bullet, weaponPos.transform.position, Quaternion.AngleAxis(angle, Vector3.forward));
         cools = 0.1f;
     }
 
     //Spawn 3-5 instead of 1 and modify their rotation
     void shotgun()
     {
+        src.PlayOneShot(shotgunSound);
         for (int i = 0; i < 5; i++)
         {
             GameObject obj = Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation * Quaternion.Euler(0, 0, -30 + (i*15)));

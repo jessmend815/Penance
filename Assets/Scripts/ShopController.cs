@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class ShopController : MonoBehaviour {
 	public List<GameObject> gameShop;
@@ -58,18 +57,33 @@ public class ShopController : MonoBehaviour {
 	//Weapons Shop
 	//Function for buying Pistol
 	public void BuyPistol(int cost)
-	{
-		PlayerController.player.pistolUnlocked = true;
+    {
+        float currBlood = PlayerController.player.blood;
+        if (currBlood >= cost)
+        {
+            PlayerController.player.pistolUnlocked = true;
+            PlayerController.player.blood -= cost;
+        }
 	}
 	//Function for buying Shotgun
 	public void BuyShotgun(int cost)
-	{
-		PlayerController.player.shotgunUnlocked = true;
+    {
+        float currBlood = PlayerController.player.blood;
+        if (currBlood >= cost)
+        {
+            PlayerController.player.shotgunUnlocked = true;
+            PlayerController.player.blood -= cost;
+        }
 	}
 	//Function for buying Machine Gun
 	public void BuyMachine(int cost)
-	{
-		PlayerController.player.machinegunUnlocked = true;
+    {
+        float currBlood = PlayerController.player.blood;
+        if (currBlood >= cost)
+        {
+            PlayerController.player.machinegunUnlocked = true;
+            PlayerController.player.blood -= cost;
+        }
 	}
 	//End Of Weapons Shop
 
