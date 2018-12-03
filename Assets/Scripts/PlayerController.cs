@@ -191,6 +191,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.I))
         {
             Information.SetActive(true);
+            Text infoText = Information.GetComponent<Text>();
+            infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, infoText.color.a);
         }
         else Information.GetComponent<FadeText>().fade = true;
 

@@ -11,7 +11,7 @@ public class TriggerController : MonoBehaviour {
         {
             if (collision.tag == "NPC")
             {
-                //collision.GetComponent<NPCController>().TakeDamage(damage);
+                collision.GetComponent<NPCController>().TakeDamage(damage);
             }
             if (collision.tag == "Enemy")
             {
