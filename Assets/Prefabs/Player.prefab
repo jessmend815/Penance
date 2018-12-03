@@ -73,7 +73,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199419505062650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.51, y: -6.09, z: 0}
+  m_LocalPosition: {x: 5.33, y: -37.11, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4079823416770042}
@@ -244,7 +244,8 @@ MonoBehaviour:
   startBloodLow: 152.163
   startBloodHigh: 185.977
   blood: 160
-  time: 60
+  time: 45
+  startTime: 45
   timeUI: {fileID: 0}
   hp: 100
   maxHp: 100

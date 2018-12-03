@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour {
     public float blood;
     //Shop Variables
     public float time;
+    public float startTime;
     public Text timeUI;
     //Health variables
     public float hp;
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnEnable()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         curWeapon = Weapons.knife;
         hp = maxHp;
         blood = Mathf.Round(Random.Range(startBloodLow, startBloodHigh));
@@ -78,10 +80,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () 
-	{
+    void Update ()
+    {
+        //Unlock mouse
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Cursor.lockState = CursorLockMode.None;
         //Move inputs
-		Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 		moveVelocity = moveInput.normalized * regSpd;
 
         //Move dude
@@ -179,6 +184,8 @@ public class PlayerController : MonoBehaviour {
 
         //Decrement the timer
         if (time > 0) time -= Time.deltaTime;
+
+        if (timeUI == null) timeUI = GameObject.FindGameObjectWithTag("Time").GetComponent<Text>();
         //Update time UI
         if (timeUI != null)
         {
@@ -290,7 +297,7 @@ public class PlayerController : MonoBehaviour {
 
     void machinegun()
     {
-        Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation);
+        //Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation + new Vector3(0, 0, Random.Range(-20, 20)));
         cools = 0.1f;
     }
 
