@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 2
+  hit: {fileID: 0}
+  src: {fileID: 0}
 --- !u!114 &114782484499671444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,8 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  hp: 15
-  maxHp: 15
+  hp: 20
+  maxHp: 20
   deadRat: {fileID: 1794214486514464, guid: ac728a9e10846c146a436fb3467fdfa5, type: 2}
   chaseDistance: 10
   attackRange: 3.5

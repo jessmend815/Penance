@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Confined;
         curWeapon = Weapons.knife;
         hp = maxHp;
+        time = startTime;
         blood = Mathf.Round(Random.Range(startBloodLow, startBloodHigh));
         pistolUnlocked = false;
         machinegunUnlocked = false;
@@ -203,11 +204,12 @@ public class PlayerController : MonoBehaviour {
         if (Information == null) Information = GameObject.FindGameObjectWithTag("Info");
 
         //Press I for help
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKey(KeyCode.I))
         {
             Information.SetActive(true);
+            Information.GetComponent<FadeText>().fade = false;
             Text infoText = Information.GetComponent<Text>();
-            infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, infoText.color.a);
+            infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, 1);
         }
         else Information.GetComponent<FadeText>().fade = true;
 

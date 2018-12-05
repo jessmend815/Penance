@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curState: 0
-  hp: 25
-  maxHp: 25
+  hp: 45
+  maxHp: 45
   deadGoblin: {fileID: 1315052068200058, guid: 2f65fb97088d1b2428837adf618c5faa, type: 2}
   chaseDistance: 11
   attackRange: 3.5
@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 4
+  hit: {fileID: 0}
+  src: {fileID: 0}
 --- !u!212 &212864585120757852
 SpriteRenderer:
   m_ObjectHideFlags: 1

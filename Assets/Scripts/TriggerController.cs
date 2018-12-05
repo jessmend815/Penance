@@ -28,4 +28,23 @@ public class TriggerController : MonoBehaviour {
             }
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!collision.isTrigger)
+        {
+            if (collision.tag == "NPC")
+            {
+                src.PlayOneShot(hit);
+                float dmg = 0.5f;
+                collision.GetComponent<NPCController>().TakeDamage(dmg);
+            }
+            if (collision.tag == "Enemy")
+            {
+                src.PlayOneShot(hit);
+                float dmg = 0.5f;
+                collision.GetComponent<EnemyController>().TakeDamage(dmg);
+            }
+        }
+    }
 }
