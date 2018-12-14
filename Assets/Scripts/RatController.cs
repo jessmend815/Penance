@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RatController : EnemyController
 {
@@ -14,10 +15,12 @@ public class RatController : EnemyController
     public float spd;
     float cools = 0f;
     float chaseCools = 0f;
+    Image health;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        health = GetComponentInChildren<Image>();
     }
 
     private void OnEnable()
@@ -56,6 +59,8 @@ public class RatController : EnemyController
         }
 
         if (chaseCools > 0) chaseCools -= Time.deltaTime;
+
+        health.fillAmount = hp / maxHp;
     }
 
     public override void TakeDamage(float damage)

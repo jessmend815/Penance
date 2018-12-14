@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ZombieSquidController : EnemyController
 {
@@ -14,10 +15,12 @@ public class ZombieSquidController : EnemyController
     public float spd;
     public GameObject bullet;
     float cools = 0f;
+    Image health;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        health = GetComponentInChildren<Image>();
     }
 
     private void OnEnable()
@@ -54,6 +57,8 @@ public class ZombieSquidController : EnemyController
         {
             cools -= Time.deltaTime;
         }
+
+        health.fillAmount = hp / maxHp;
     }
 
     public override void TakeDamage(float damage)

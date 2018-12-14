@@ -8,9 +8,16 @@ public class EnemyTriggerController : MonoBehaviour
     public AudioClip hit;
     public AudioSource src;
 
+    float cools = 0;
+
     private void Awake()
     {
         src = GameObject.FindGameObjectWithTag("Source").GetComponent<AudioSource>();
+    }
+
+    void ChangeCools()
+    {
+        cools = 0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,7 +26,13 @@ public class EnemyTriggerController : MonoBehaviour
         {
             if (collision.tag == "Player")
             {
-                src.PlayOneShot(hit);
+                collision.GetComponent<SpriteOutline>().enabled = true;
+                if (cools <= 0)
+                {
+                    src.PlayOneShot(hit);
+                    cools = 1f;
+                    Invoke("ChangeCools", 0.25f);
+                }
                 collision.GetComponent<PlayerController>().TakeDamage(damage);
             }
         }

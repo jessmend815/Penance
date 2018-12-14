@@ -37,6 +37,7 @@ public class BulletController : MonoBehaviour {
         {
             if (!collision.isTrigger)
             {
+                collision.GetComponent<SpriteOutline>().enabled = true;
                 src.PlayOneShot(hit);
                 Invoke("Disable", 0.01f);
                 collision.gameObject.GetComponent<NPCController>().TakeDamage(damage);
@@ -46,6 +47,7 @@ public class BulletController : MonoBehaviour {
         {
             if (collision.isTrigger == false)
             {
+                collision.GetComponent<SpriteOutline>().enabled = true;
                 src.PlayOneShot(hit);
                 collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
                 Invoke("Disable", 0.01f);

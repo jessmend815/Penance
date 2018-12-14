@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class EnemyController : MonoBehaviour
 {
+
     public enum states { idle, chase, attack };
     public states curState = states.idle;
 

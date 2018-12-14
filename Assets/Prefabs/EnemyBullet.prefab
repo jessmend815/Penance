@@ -197,7 +197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spd: 25
   damage: 5
-  hit: {fileID: 8300000, guid: 70b6cc765a76dca4b96501818a9409a3, type: 3}
+  hit: {fileID: 8300000, guid: 983403f663071364dbad4c6609846cdb, type: 3}
+  src: {fileID: 0}
 --- !u!212 &212284203750858208
 SpriteRenderer:
   m_ObjectHideFlags: 1

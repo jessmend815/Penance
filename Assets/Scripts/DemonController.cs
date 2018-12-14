@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DemonController : EnemyController
 {
@@ -17,11 +18,13 @@ public class DemonController : EnemyController
     float dodgeCools = 0f;
     public float dodgeSpd;
     Rigidbody2D rb;
+    Image health;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponentInChildren<Image>();
     }
 
     private void OnEnable()
@@ -65,6 +68,8 @@ public class DemonController : EnemyController
         if (dodgeCools > 0) dodgeCools -= Time.deltaTime;
 
         if (dodgeCools <= 0) rb.velocity = Vector3.zero;
+
+        health.fillAmount = hp / maxHp;
     }
 
     public override void TakeDamage(float damage)

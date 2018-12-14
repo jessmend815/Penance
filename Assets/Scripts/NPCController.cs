@@ -7,14 +7,17 @@ public class NPCController : MonoBehaviour {
 	public bool isClose = false;
 	public bool shopOpen = false;
 	public GameObject TestShop;
-	public float npcHp = 100;
-	public GameObject deadNpc;
+    public float npcHp = 100;
+    public float maxHp = 100;
+    public GameObject deadNpc;
     public AudioClip[] welcome;
     AudioSource src;
+    Image health;
 
     private void Awake()
     {
         src = GetComponent<AudioSource>();
+        health = GetComponentInChildren<Image>();
     }
 
     public void TakeDamage(float damage)
@@ -43,8 +46,16 @@ public class NPCController : MonoBehaviour {
             PlayerController.player.isInShop = false;
         }
 	}
-	
-	private void Update () 
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            isClose = true;
+        }
+    }
+
+    private void Update () 
 	{	//Opens Shop Menu When Pressing E
 		if (isClose)
 		{
@@ -69,5 +80,7 @@ public class NPCController : MonoBehaviour {
 		{
 			TestShop.SetActive(false);
 		}
+
+        health.fillAmount = npcHp / maxHp;
 	}
 }

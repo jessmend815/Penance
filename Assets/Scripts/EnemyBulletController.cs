@@ -10,6 +10,8 @@ public class EnemyBulletController : MonoBehaviour
     public AudioClip hit;
     public AudioSource src;
 
+    float cools = 0;
+
     private void Awake()
     {
         src = GameObject.FindGameObjectWithTag("Source").GetComponent<AudioSource>();
@@ -32,13 +34,24 @@ public class EnemyBulletController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    void ChangeCools()
+    {
+        cools = 0f;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             if (collision.isTrigger == false)
             {
-                src.PlayOneShot(hit);
+                collision.GetComponent<SpriteOutline>().enabled = true;
+                if (cools <= 0)
+                {
+                    src.PlayOneShot(hit);
+                    cools = 1f;
+                    Invoke("ChangeCools", 0.25f);
+                }
                 PlayerController.player.TakeDamage(damage);
                 Invoke("Disable", 0.01f);
             }

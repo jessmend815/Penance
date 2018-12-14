@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c74d97ef8e42d34b884eeab32be11b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  val: 0.0075
+  val: 0.00075
   fade: 0
 --- !u!114 &114057329284423820
 MonoBehaviour:
@@ -722,7 +722,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Welcome to Penance! (Press I to open this text again)
+  m_Text: 'Welcome to Penance! (Hold I to show this text again)
 
     The objective of the game is to defeat the Demon lord before the time runs out!
 

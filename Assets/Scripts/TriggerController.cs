@@ -7,9 +7,16 @@ public class TriggerController : MonoBehaviour {
     public AudioClip hit;
     public AudioSource src;
 
+    float cools = 0;
+
     private void Awake()
     {
         src = GameObject.FindGameObjectWithTag("Source").GetComponent<AudioSource>();
+    }
+
+    void ChangeCools()
+    {
+        cools = 0f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,12 +25,24 @@ public class TriggerController : MonoBehaviour {
         {
             if (collision.tag == "NPC")
             {
-                src.PlayOneShot(hit);
+                collision.GetComponent<SpriteOutline>().enabled = true;
+                if (cools <= 0)
+                {
+                    cools = 1f;
+                    src.PlayOneShot(hit);
+                    Invoke("ChangeCools", 0.5f);
+                }
                 collision.GetComponent<NPCController>().TakeDamage(damage);
             }
             if (collision.tag == "Enemy")
             {
-                src.PlayOneShot(hit);
+                collision.GetComponent<SpriteOutline>().enabled = true;
+                if (cools <= 0)
+                {
+                    src.PlayOneShot(hit);
+                    cools = 1f;
+                    Invoke("ChangeCools", 0.5f);
+                }
                 collision.GetComponent<EnemyController>().TakeDamage(damage);
             }
         }
@@ -35,13 +54,25 @@ public class TriggerController : MonoBehaviour {
         {
             if (collision.tag == "NPC")
             {
-                src.PlayOneShot(hit);
+                collision.GetComponent<SpriteOutline>().enabled = true;
+                if (cools <= 0)
+                {
+                    src.PlayOneShot(hit);
+                    cools = 1f;
+                    Invoke("ChangeCools", 0.5f);
+                }
                 float dmg = 0.5f;
                 collision.GetComponent<NPCController>().TakeDamage(dmg);
             }
             if (collision.tag == "Enemy")
             {
-                src.PlayOneShot(hit);
+                collision.GetComponent<SpriteOutline>().enabled = true;
+                if (cools <= 0)
+                {
+                    src.PlayOneShot(hit);
+                    cools = 1f;
+                    Invoke("ChangeCools", 0.5f);
+                }
                 float dmg = 0.5f;
                 collision.GetComponent<EnemyController>().TakeDamage(dmg);
             }

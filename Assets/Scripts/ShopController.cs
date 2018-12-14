@@ -6,7 +6,15 @@ using UnityEngine.UI;
 public class ShopController : MonoBehaviour {
 	public List<GameObject> gameShop;
 	GameObject[] NPC;
-	void OnEnable()
+    AudioSource src;
+    public AudioClip button;
+
+    private void Awake()
+    {
+        src = GetComponent<AudioSource>();
+    }
+
+    void OnEnable()
 	{
 		NPC = GameObject.FindGameObjectsWithTag("NPC");
 		for (int i = 0; i < NPC.Length; i++) 
@@ -28,6 +36,7 @@ public class ShopController : MonoBehaviour {
 		{
 			PlayerController.player.blood -= cost;
 			PlayerController.player.time += 10;
+            src.PlayOneShot(button);
 		}
 	}
 	//Function for buying a medium amount of time
@@ -39,7 +48,8 @@ public class ShopController : MonoBehaviour {
 		{
 			PlayerController.player.blood -= cost;
 			PlayerController.player.time += 30;
-		}
+            src.PlayOneShot(button);
+        }
 	}
 	//Function for buying a large amount of time
 	public void BuyTimeL(int cost)
@@ -50,7 +60,8 @@ public class ShopController : MonoBehaviour {
 		{
 			PlayerController.player.blood -= cost;
 			PlayerController.player.time += 45;
-		}
+            src.PlayOneShot(button);
+        }
 	}
 	//End Of Time Shop
 
@@ -63,6 +74,7 @@ public class ShopController : MonoBehaviour {
         {
             PlayerController.player.pistolUnlocked = true;
             PlayerController.player.blood -= cost;
+            src.PlayOneShot(button);
         }
 	}
 	//Function for buying Shotgun
@@ -73,6 +85,7 @@ public class ShopController : MonoBehaviour {
         {
             PlayerController.player.shotgunUnlocked = true;
             PlayerController.player.blood -= cost;
+            src.PlayOneShot(button);
         }
 	}
 	//Function for buying Machine Gun
@@ -83,6 +96,7 @@ public class ShopController : MonoBehaviour {
         {
             PlayerController.player.machinegunUnlocked = true;
             PlayerController.player.blood -= cost;
+            src.PlayOneShot(button);
         }
 	}
 	//End Of Weapons Shop
@@ -96,7 +110,8 @@ public class ShopController : MonoBehaviour {
 		{
 			PlayerController.player.blood -= cost;
 			PlayerController.player.hp = PlayerController.player.maxHp;
-		}
+            src.PlayOneShot(button);
+        }
 	}
 	//End Of Potion Shop
 

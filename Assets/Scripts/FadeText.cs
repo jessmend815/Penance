@@ -15,14 +15,20 @@ public class FadeText : MonoBehaviour {
     }
 
     void Update () {
-		if (fade)
-		{
-			Information.color = new Color(Information.color.r, Information.color.g, Information.color.b, Information.color.a - val);
-		}
-		if (Information.color.a <= 0)
-		{
-			PlayerController.player.Information.SetActive(false);
-		}
-		 
+        if (!Application.isEditor)
+        {
+            if (fade)
+            {
+                Information.color = new Color(Information.color.r, Information.color.g, Information.color.b, Information.color.a - val);
+            }
+            if (Information.color.a <= 0)
+            {
+                PlayerController.player.Information.SetActive(false);
+            }
+        }
+        else
+        {
+            Information.color = new Color(Information.color.r, Information.color.g, Information.color.b, 0f);
+        }
     }
 }
