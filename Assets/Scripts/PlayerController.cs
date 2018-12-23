@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     public Weapons curWeapon = Weapons.knife;
     public float cools = 0f;
     public GameObject bullet;
+    public GameObject shotShell;
     //Variables for animation
     //Sprite order: right, up, left, down
     public Sprite[] facingSprites;
@@ -323,13 +324,19 @@ public class PlayerController : MonoBehaviour {
         src.PlayOneShot(shotgunSound);
         for (int i = 0; i < 5; i++)
         {
-            GameObject obj = Instantiate(bullet, weaponPos.transform.position, weaponPos.transform.rotation * Quaternion.Euler(0, 0, -30 + (i*15)));
+            GameObject obj = Instantiate(shotShell, weaponPos.transform.position, weaponPos.transform.rotation * Quaternion.Euler(0, 0, -20 + (i*10)));
         }
-        cools = 2.5f;
+        cools = 1.625f;
     }
 
     public void TakeDamage(float damage)
     {
         hp -= damage;
+    }
+
+    public void Win()
+    {
+        PlayerController.player.gameObject.SetActive(false);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Victory");
     }
 }

@@ -324,6 +324,7 @@ MonoBehaviour:
   curWeapon: 0
   cools: -0.006670736
   bullet: {fileID: 1801313631809822, guid: 95a88064630a92844ae5cbedcb4ad2a0, type: 2}
+  shotShell: {fileID: 1657144838844566, guid: 76efe2cd9d5fdeb4a9671a98a1d3eb91, type: 2}
   facingSprites:
   - {fileID: 21300000, guid: 7160f4ff6ed0c4a4f9bd722851d68f24, type: 3}
   - {fileID: 21300000, guid: 59ee5dde9f0dc234193550ab045c4a7a, type: 3}

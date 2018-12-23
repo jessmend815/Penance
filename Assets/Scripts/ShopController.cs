@@ -8,6 +8,7 @@ public class ShopController : MonoBehaviour {
 	GameObject[] NPC;
     AudioSource src;
     public AudioClip button;
+    public GameObject needMoreBlood;
 
     private void Awake()
     {
@@ -37,8 +38,12 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.blood -= cost;
 			PlayerController.player.time += 10;
             src.PlayOneShot(button);
-		}
-	}
+        }
+        else
+        {
+            ActivateBloodException();
+        }
+    }
 	//Function for buying a medium amount of time
 	public void BuyTimeM(int cost)
 	{
@@ -50,7 +55,11 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.time += 30;
             src.PlayOneShot(button);
         }
-	}
+        else
+        {
+            ActivateBloodException();
+        }
+    }
 	//Function for buying a large amount of time
 	public void BuyTimeL(int cost)
 	{	
@@ -62,7 +71,11 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.time += 45;
             src.PlayOneShot(button);
         }
-	}
+        else
+        {
+            ActivateBloodException();
+        }
+    }
 	//End Of Time Shop
 
 	//Weapons Shop
@@ -76,7 +89,11 @@ public class ShopController : MonoBehaviour {
             PlayerController.player.blood -= cost;
             src.PlayOneShot(button);
         }
-	}
+        else
+        {
+            ActivateBloodException();
+        }
+    }
 	//Function for buying Shotgun
 	public void BuyShotgun(int cost)
     {
@@ -87,7 +104,11 @@ public class ShopController : MonoBehaviour {
             PlayerController.player.blood -= cost;
             src.PlayOneShot(button);
         }
-	}
+        else
+        {
+            ActivateBloodException();
+        }
+    }
 	//Function for buying Machine Gun
 	public void BuyMachine(int cost)
     {
@@ -98,7 +119,11 @@ public class ShopController : MonoBehaviour {
             PlayerController.player.blood -= cost;
             src.PlayOneShot(button);
         }
-	}
+        else
+        {
+            ActivateBloodException();
+        }
+    }
 	//End Of Weapons Shop
 
 	//Potion Shop
@@ -112,11 +137,18 @@ public class ShopController : MonoBehaviour {
 			PlayerController.player.hp = PlayerController.player.maxHp;
             src.PlayOneShot(button);
         }
+        else
+        {
+            ActivateBloodException();
+        }
 	}
 	//End Of Potion Shop
 
-	
-
-	
-
+    void ActivateBloodException()
+    {
+        needMoreBlood.SetActive(true);
+        Text infoText = needMoreBlood.GetComponent<Text>();
+        infoText.color = new Color(infoText.color.r, infoText.color.g, infoText.color.b, 1);
+        needMoreBlood.GetComponent<FadeText>().fade = true;
+    }
 }

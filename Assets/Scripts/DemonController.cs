@@ -53,9 +53,8 @@ public class DemonController : EnemyController
 
         if (hp <= 0)
         {
+            PlayerController.player.Invoke("Win", 1f);
             Instantiate(deadDemon, transform.position, Quaternion.identity);
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Victory");
-            PlayerController.player.gameObject.SetActive(false);
             Destroy(gameObject);
         }
 
